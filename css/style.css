@@ -69,6 +69,19 @@
     .menu-hamburguesa span {
         background: #fff;
     }
+    #bienvenida-animada {
+        font-size: 1.2rem;
+        max-width: 95vw;
+        padding: 0 2vw;
+        word-break: break-word;
+        white-space: normal;
+    }
+    #bienvenida-animada-texto {
+        font-size: 1.2rem;
+        max-width: 95vw;
+        word-break: break-word;
+        white-space: normal;
+    }
 }
 #bienvenida-animada {
     display: flex;
