@@ -2,17 +2,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-toggle');
     const navList = document.getElementById('nav-list');
+    const body = document.body;
     if (menuBtn && navList) {
         menuBtn.addEventListener('click', function() {
             navList.classList.toggle('activo');
+            body.classList.toggle('menu-abierto', navList.classList.contains('activo'));
         });
         // Cierra el menú al hacer click en un enlace
         navList.querySelectorAll('a').forEach(function(link) {
             link.addEventListener('click', function() {
                 navList.classList.remove('activo');
+                body.classList.remove('menu-abierto');
             });
         });
     }
+    // Siempre mostrar el botón hamburguesa en móviles
+    window.addEventListener('resize', function () {
+        if (window.innerWidth <= 700) {
+            menuBtn.style.display = 'flex';
+        } else {
+            menuBtn.style.display = '';
+        }
+    });
 });
 // Animación máquina de escribir para mensaje de bienvenida
 document.addEventListener('DOMContentLoaded', function() {
