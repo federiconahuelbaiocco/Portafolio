@@ -21,6 +21,13 @@ header {
     background: #232323;
     z-index: 10;
 }
+header > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    min-height: 56px;
+}
 @keyframes headerFade {
     0% { opacity: 0; transform: translateY(-40px); }
     100% { opacity: 1; transform: none; }
@@ -41,6 +48,14 @@ header {
     margin: 0;
     position: static;
     z-index: 11;
+}
+.menu-hamburguesa {
+    margin-left: 8px !important;
+    margin-right: 0 !important;
+}
+.modo-oscuro-header {
+    margin-right: 8px !important;
+    margin-left: 0 !important;
 }
 #toggle-dark {
     background: none;
@@ -170,6 +185,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 0;
     min-height: 56px;
 }
 nav ul {
