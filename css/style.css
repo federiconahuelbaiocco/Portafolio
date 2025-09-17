@@ -1,3 +1,99 @@
+.menu-hamburguesa {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+    z-index: 1001;
+}
+.menu-hamburguesa span {
+    display: block;
+    width: 28px;
+    height: 4px;
+    margin: 4px 0;
+    background: #ffd600;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+@media (max-width: 700px) {
+    nav {
+        position: relative;
+    }
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background: #232323;
+        border-radius: 0 0 0 16px;
+        box-shadow: -2px 2px 16px rgba(0,0,0,0.18);
+        width: 70vw;
+        max-width: 240px;
+        height: 100vh;
+        padding: 60px 0 0 0;
+        z-index: 2000;
+        transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+        transform: translateX(100%);
+    }
+    nav ul.activo {
+        display: flex;
+        transform: translateX(0);
+    }
+    .menu-hamburguesa {
+        display: flex;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2100;
+    }
+    nav ul li {
+        margin: 18px 0;
+        text-align: right;
+    }
+    nav ul li a {
+        font-size: 1.2rem;
+        padding: 8px 24px;
+        display: block;
+        color: #fff;
+        transition: color 0.2s;
+    }
+    nav ul li a:hover {
+        color: #2196f3;
+    }
+    .menu-hamburguesa span {
+        background: #fff;
+    }
+}
+#bienvenida-animada {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    min-width: 1ch;
+    max-width: 100vw;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#bienvenida-animada-texto {
+    display: inline-block;
+    border-right: 2px solid #fff;
+    animation: blink-caret 0.7s step-end infinite;
+}
+body:not(.dark-mode) #bienvenida-animada-texto {
+    border-right: 2px solid #222;
+}
+@keyframes blink-caret {
+    0%, 100% { border-color: currentColor !important; }
+    50% { border-color: transparent; }
+}
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -38,9 +134,9 @@ header {
     cursor: pointer;
     margin: 10px 20px 0 0;
     font-size: 1.8rem;
-    color: #ffd600;
+    color: #222;
 }
-.dark-mode .tech-card span {
+body.dark-mode .tech-card span {
     color: #fff;
 }
 body.dark-mode {
@@ -58,7 +154,7 @@ body.dark-mode nav a:hover {
     color: #2196f3;
 }
 body.dark-mode #toggle-dark {
-    color: #ffd600;
+    color: #fff;
 }
 body.dark-mode main {
     background: #232323;
@@ -78,7 +174,9 @@ body.dark-mode .redes-icono {
 }
 body.dark-mode footer {
     background: #232323;
-    color: #ffd600;
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
 }
 .sfml-img {
     width: 120px !important;
@@ -228,6 +326,10 @@ form {
     gap: 10px;
     max-width: 400px;
     margin: 0 auto;
+}
+footer {
+    text-align: center !important;
+    font-size: 1.2rem !important;
 }
 
 @media (max-width: 700px) {

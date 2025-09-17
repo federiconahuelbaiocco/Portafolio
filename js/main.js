@@ -1,3 +1,35 @@
+// Menú hamburguesa responsive
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menu-toggle');
+    const navList = document.getElementById('nav-list');
+    if (menuBtn && navList) {
+        menuBtn.addEventListener('click', function() {
+            navList.classList.toggle('activo');
+        });
+        // Cierra el menú al hacer click en un enlace
+        navList.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                navList.classList.remove('activo');
+            });
+        });
+    }
+});
+// Animación máquina de escribir para mensaje de bienvenida
+document.addEventListener('DOMContentLoaded', function() {
+    const bienvenidaTexto = document.getElementById('bienvenida-animada-texto');
+    if (bienvenidaTexto) {
+        const texto = '¡Bienvenido a mi portafolio!';
+        let i = 0;
+        function escribir() {
+            if (i <= texto.length) {
+                bienvenidaTexto.textContent = texto.slice(0, i);
+                i++;
+                setTimeout(escribir, 70);
+            }
+        }
+        escribir();
+    }
+});
 // Script para modo oscuro/claro
 function setDarkMode(active) {
     if (active) {
