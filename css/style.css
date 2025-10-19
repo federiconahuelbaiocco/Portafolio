@@ -3,11 +3,23 @@
     transform: translateY(30px);
     animation: fadeInMove 0.8s ease-out forwards;
 }
+html {
+    scroll-behavior: smooth;
+}
 @keyframes fadeInMove {
     to {
         opacity: 1;
         transform: none;
     }
+}
+/* Evita que el contenido anclado quede oculto bajo el header sticky */
+section {
+    scroll-margin-top: 72px;
+}
+
+/* Bloquea el scroll del body cuando el menú móvil está abierto */
+body.menu-abierto {
+    overflow: hidden;
 }
 
 header {
@@ -15,11 +27,13 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    position: sticky;
+    top: 0;
     min-height: 56px;
     padding: 0 16px;
     background: #232323;
-    z-index: 10;
+    z-index: 1000;
+    transition: transform 0.25s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 header > div {
     display: flex;
@@ -27,6 +41,12 @@ header > div {
     width: 100%;
     justify-content: space-between;
     min-height: 56px;
+}
+.header-oculto {
+    transform: translateY(-100%);
+}
+.header-shadow {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
 }
 @keyframes headerFade {
     0% { opacity: 0; transform: translateY(-40px); }
@@ -50,18 +70,18 @@ header > div {
     z-index: 11;
 }
 .menu-hamburguesa {
-    margin-left: 8px !important;
+    margin-left: 12px !important; /* separa un poco del borde izquierdo */
     margin-right: 0 !important;
 }
 .modo-oscuro-header {
-    margin-right: 8px !important;
+    margin-right: 0 !important; /* acercar al borde derecho */
     margin-left: 0 !important;
 }
 #toggle-dark {
     background: none;
     border: none;
     cursor: pointer;
-    margin: 10px 20px 0 0;
+    margin: 0 8px 0 0; /* menos separación a la derecha y centrado vertical */
     font-size: 1.8rem;
     color: #222;
 }
@@ -89,6 +109,15 @@ body.dark-mode main {
     background: #232323;
     color: #f4f4f4;
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+/* Afinar componentes Bootstrap en modo oscuro */
+body.dark-mode .list-group-item {
+    background-color: #2a2a2a;
+    color: #f4f4f4;
+    border-color: #3a3a3a;
+}
+body.dark-mode .list-group {
+    background-color: #2a2a2a;
 }
 body.dark-mode .card, body.dark-mode .tech-card {
     background: #222;
@@ -269,6 +298,26 @@ footer {
     font-size: 1.2rem !important;
 }
 
+/* Mejora visual de badges de tecnologías */
+.tech-badges .badge {
+    font-size: 0.95rem;
+    padding: 0.55em 0.8em;
+    border-radius: 10rem; /* pill */
+    margin: 0 6px 6px 0;
+}
+.tech-badges p strong {
+    margin-right: 6px;
+}
+@media (min-width: 768px) {
+    .tech-badges .badge {
+        font-size: 1rem;
+        padding: 0.6em 0.9em;
+    }
+}
+body.dark-mode .tech-badges .badge {
+    filter: saturate(1.1) brightness(1.05);
+}
+
 /* Menú hamburguesa clásico */
 .menu-hamburguesa {
     display: flex;
@@ -303,7 +352,8 @@ body.dark-mode .menu-hamburguesa span {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        position: relative;
+        position: sticky;
+        top: 0;
         padding: 0 0 0 0;
         min-height: 56px;
     }
