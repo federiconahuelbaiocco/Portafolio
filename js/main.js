@@ -1,5 +1,5 @@
 // Menú hamburguesa responsive
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('menu-toggle');
     const navList = document.getElementById('nav-list');
     const body = document.body;
@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (menuBtn && navList) {
-        menuBtn.addEventListener('click', function() {
+        menuBtn.addEventListener('click', function () {
             navList.classList.toggle('activo');
             body.classList.toggle('menu-abierto', navList.classList.contains('activo'));
         });
         // Desplazamiento suave y cierre de menú al hacer click en un enlace
-        navList.querySelectorAll('a[href^="#"]').forEach(function(link) {
-            link.addEventListener('click', function(e) {
+        navList.querySelectorAll('a[href^="#"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
                 const hash = this.getAttribute('href');
                 const target = document.querySelector(hash);
                 if (!target) return; // si no hay destino, dejar comportamiento por defecto
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 // Animación máquina de escribir para mensaje de bienvenida
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const bienvenidaTexto = document.getElementById('bienvenida-animada-texto');
     if (bienvenidaTexto) {
         const texto = '¡Bienvenido a mi portafolio!';
@@ -90,19 +90,19 @@ function guardarPreferencia(modoOscuro) {
 function obtenerPreferencia() {
     return localStorage.getItem('modoOscuro') === '0' ? false : true;
 }
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('toggle-dark');
     if (!btn) return;
     let modoOscuro = obtenerPreferencia();
     setDarkMode(modoOscuro);
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
         modoOscuro = !document.body.classList.contains('dark-mode');
         setDarkMode(modoOscuro);
         guardarPreferencia(modoOscuro);
     });
 });
 // Ocultar header al desplazarse hacia abajo y mostrar al subir
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const header = document.querySelector('header');
     const navList = document.getElementById('nav-list');
     let prevY = window.scrollY;
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         ticking = false;
     }
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (!ticking) {
             window.requestAnimationFrame(onScroll);
             ticking = true;
