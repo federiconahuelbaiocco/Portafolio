@@ -671,7 +671,8 @@ body.dark-mode .menu-hamburguesa span {
     }
 
     .nav-list li a {
-        color: #fff;
+        color: #222;
+        /* Texto oscuro para modo claro */
         font-size: 1rem;
         background: none;
         padding: 8px 16px;
