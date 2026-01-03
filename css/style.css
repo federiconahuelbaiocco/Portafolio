@@ -15,6 +15,23 @@ html {
     }
 }
 
+.cursor-blink {
+    animation: blink 1s step-end infinite;
+    font-weight: 300;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
 /* Evita que el contenido anclado quede oculto bajo el header sticky */
 section {
     scroll-margin-top: 72px;
@@ -32,11 +49,14 @@ header {
     justify-content: space-between;
     position: sticky;
     top: 0;
-    min-height: 56px;
+    min-height: 60px;
     padding: 0 16px;
-    background: #232323;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     z-index: 1000;
-    transition: transform 0.25s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform 0.25s ease-in-out, background 0.25s, box-shadow 0.2s;
 }
 
 header>div {
@@ -69,7 +89,7 @@ header>div {
 
 .card,
 .tech-card {
-    transition: transform 0.25s cubic-bezier(.4, 0, .2, 1), box-shadow 0.25s;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover,
@@ -120,16 +140,18 @@ body.dark-mode {
 }
 
 body.dark-mode header {
-    background: #232323;
+    background: rgba(28, 28, 28, 0.85);
     color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 body.dark-mode nav a {
     color: #fff;
 }
 
-body.dark-mode nav a:hover {
-    color: #2196f3;
+body.dark-mode nav a:hover,
+body.dark-mode nav a.active {
+    color: #64b5f6;
 }
 
 body.dark-mode #toggle-dark {
@@ -152,6 +174,7 @@ body.dark-mode .list-group-item {
 body.dark-mode .list-group {
     background-color: #2a2a2a;
 }
+
 /* Aumentar contraste de textos atenuados en modo oscuro */
 body.dark-mode .text-muted {
     color: #bdbdbd !important;
@@ -162,6 +185,12 @@ body.dark-mode .tech-card {
     background: #222;
     color: #fff;
     border: 1px solid #333;
+}
+
+body.dark-mode .card:hover,
+body.dark-mode .tech-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-mode .proyecto-img,
@@ -250,7 +279,7 @@ body.dark-mode footer {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     background: #f4f4f4;
@@ -258,9 +287,8 @@ body {
 }
 
 header {
-    background: #222;
-    color: #fff;
-    padding: 10px 0;
+    /* Eliminado background y color redundantes para permitir glassmorphism */
+    padding: 10px 16px;
 }
 
 nav {
@@ -287,8 +315,11 @@ nav a {
     font-weight: bold;
 }
 
-nav a:hover {
-    text-decoration: underline;
+nav a:hover,
+nav a.active {
+    text-decoration: none;
+    color: #0d6efd;
+    /* Azul Bootstrap default para contraste en light mode */
 }
 
 main {
@@ -302,17 +333,98 @@ main {
     box-sizing: border-box;
 }
 
-.foto-perfil {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 20px auto;
+/* Hero Section Rediseñado */
+#presentacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 30px;
+    padding: 40px 0;
 }
 
-section {
-    margin-bottom: 40px;
+@media (min-width: 768px) {
+    #presentacion {
+        flex-direction: row-reverse;
+        text-align: left;
+        justify-content: space-between;
+        padding: 60px 20px;
+    }
+
+    .hero-text {
+        flex: 1;
+        padding-right: 40px;
+    }
+
+    .foto-perfil {
+        margin: 0 !important;
+        width: 200px;
+        height: 200px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #888;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+body.dark-mode .hero-subtitle {
+    color: #ccc;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+}
+
+.btn-portfolio {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-portfolio {
+    background: #0d6efd;
+    color: white;
+    border: 2px solid #0d6efd;
+}
+
+.btn-primary-portfolio:hover {
+    background: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    color: white;
+}
+
+.btn-outline-portfolio {
+    background: transparent;
+    color: #333;
+    border: 2px solid #333;
+}
+
+body.dark-mode .btn-outline-portfolio {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-outline-portfolio:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
 }
 
 h1,
@@ -420,6 +532,53 @@ body.dark-mode .tech-badges .badge {
 
 body.dark-mode .menu-hamburguesa span {
     background: #fff;
+}
+
+/* Botón Volver Arriba */
+#btn-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#btn-back-to-top:hover {
+    background: #0b5ed7;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
+}
+
+/* Animación Staggered para tarjetas */
+.card-hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @media (max-width: 700px) {

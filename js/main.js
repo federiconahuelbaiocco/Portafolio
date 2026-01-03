@@ -137,4 +137,80 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
     // Ejecutar una vez al cargar para aplicar sombra si inicia desplazado
     onScroll();
+
+    // Scroll Spy: Resaltar enlace activo
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // Activa cuando la sección está en la parte superior-media
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Remover active de todos
+                navLinks.forEach(link => link.classList.remove('active'));
+
+                // Agregar active al correspondiente
+                const id = entry.target.getAttribute('id');
+                const activeLink = document.querySelector(`.nav-list a[href="#${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Botón Volver Arriba
+    const btnBackToTop = document.getElementById('btn-back-to-top');
+
+    if (btnBackToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btnBackToTop.classList.add('show');
+            } else {
+                btnBackToTop.classList.remove('show');
+            }
+        });
+
+        btnBackToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Animación en cascada (Staggered) para Proyectos y Aptitudes
+    const staggerContainers = document.querySelectorAll('.proyectos'); // Selecciona contenedores de cartas
+
+    const staggerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const cards = entry.target.querySelectorAll('.card, .tech-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('card-visible');
+                    }, index * 150); // 150ms de retraso entre cada una
+                });
+                staggerObserver.unobserve(entry.target); // Solo animar una vez
+            }
+        });
+    }, { rootMargin: '0px 0px -100px 0px' });
+
+    staggerContainers.forEach(container => {
+        // Preparar las cartas: añadir clase hidden
+        const cards = container.querySelectorAll('.card, .tech-card');
+        cards.forEach(card => card.classList.add('card-hidden'));
+
+        // Observar el contenedor
+        staggerObserver.observe(container);
+    });
 });
