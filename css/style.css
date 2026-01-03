@@ -146,12 +146,12 @@ body.dark-mode header {
 }
 
 body.dark-mode nav a {
-    color: #fff;
+    color: #fff !important;
 }
 
 body.dark-mode nav a:hover,
 body.dark-mode nav a.active {
-    color: #64b5f6;
+    color: #64b5f6 !important;
 }
 
 body.dark-mode #toggle-dark {

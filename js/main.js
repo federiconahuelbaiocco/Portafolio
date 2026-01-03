@@ -85,10 +85,10 @@ function setDarkMode(active) {
     }
 }
 function guardarPreferencia(modoOscuro) {
-    localStorage.setItem('theme_preference', modoOscuro ? '1' : '0');
+    localStorage.setItem('theme_pref_v2', modoOscuro ? '1' : '0');
 }
 function obtenerPreferencia() {
-    return localStorage.getItem('theme_preference') === '0' ? false : true;
+    return localStorage.getItem('theme_pref_v2') === '0' ? false : true;
 }
 document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('toggle-dark');
