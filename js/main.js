@@ -1,4 +1,4 @@
-// Menú hamburguesa responsive
+
 document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('menu-toggle');
     const navList = document.getElementById('nav-list');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function smoothScrollTo(targetY, duration = 800) {
         const startY = window.scrollY;
         const diff = Math.max(0, targetY) - startY;
-        if (Math.abs(diff) < 1) return; // nada que animar
+        if (Math.abs(diff) < 1) return;
         const startTime = performance.now();
         function step(now) {
             const elapsed = now - startTime;
@@ -30,26 +30,26 @@ document.addEventListener('DOMContentLoaded', function () {
             navList.classList.toggle('activo');
             body.classList.toggle('menu-abierto', navList.classList.contains('activo'));
         });
-        // Desplazamiento suave y cierre de menú al hacer click en un enlace
+
         navList.querySelectorAll('a[href^="#"]').forEach(function (link) {
             link.addEventListener('click', function (e) {
                 const hash = this.getAttribute('href');
                 const target = document.querySelector(hash);
-                if (!target) return; // si no hay destino, dejar comportamiento por defecto
+                if (!target) return;
                 e.preventDefault();
-                // cerrar menú móvil antes de desplazar
+
                 navList.classList.remove('activo');
                 body.classList.remove('menu-abierto');
-                // calcular offset por header sticky
+
                 const headerHeight = header ? header.getBoundingClientRect().height : 0;
                 const targetY = Math.round(target.getBoundingClientRect().top + window.pageYOffset - (headerHeight + 8));
-                // asegurar que el header esté visible antes/después
+
                 if (header) header.classList.remove('header-oculto');
                 smoothScrollTo(targetY, 900);
             });
         });
     }
-    // Siempre mostrar el botón hamburguesa en móviles
+
     window.addEventListener('resize', function () {
         if (window.innerWidth <= 700) {
             menuBtn.style.display = 'flex';
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-// Animación máquina de escribir para mensaje de bienvenida
+
 document.addEventListener('DOMContentLoaded', function () {
     const bienvenidaTexto = document.getElementById('bienvenida-animada-texto');
     if (bienvenidaTexto) {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         escribir();
     }
 });
-// Script para modo oscuro/claro
+
 function setDarkMode(active) {
     if (active) {
         document.body.classList.add('dark-mode');
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         guardarPreferencia(modoOscuro);
     });
 });
-// Ocultar header al desplazarse hacia abajo y mostrar al subir
+
 document.addEventListener('DOMContentLoaded', function () {
     const header = document.querySelector('header');
     const navList = document.getElementById('nav-list');
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentY = window.scrollY;
         const bajando = currentY > prevY;
         prevY = currentY;
-        // No ocultar si el menú móvil está abierto
+
         const menuAbierto = document.body.classList.contains('menu-abierto');
         if (!header) return;
         if (!menuAbierto) {
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 header.classList.remove('header-oculto');
             }
         }
-        // Sombra cuando hay desplazamiento
+
         if (currentY > 0) {
             header.classList.add('header-shadow');
         } else {
@@ -135,26 +135,26 @@ document.addEventListener('DOMContentLoaded', function () {
             ticking = true;
         }
     }, { passive: true });
-    // Ejecutar una vez al cargar para aplicar sombra si inicia desplazado
+
     onScroll();
 
-    // Scroll Spy: Resaltar enlace activo
+
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-list a');
 
     const observerOptions = {
         root: null,
-        rootMargin: '-20% 0px -70% 0px', // Activa cuando la sección está en la parte superior-media
+        rootMargin: '-20% 0px -70% 0px',
         threshold: 0
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Remover active de todos
+
                 navLinks.forEach(link => link.classList.remove('active'));
 
-                // Agregar active al correspondiente
+
                 const id = entry.target.getAttribute('id');
                 const activeLink = document.querySelector(`.nav-list a[href="#${id}"]`);
                 if (activeLink) {
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.observe(section);
     });
 
-    // Botón Volver Arriba
+
     const btnBackToTop = document.getElementById('btn-back-to-top');
 
     if (btnBackToTop) {
@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Animación en cascada (Staggered) para Proyectos y Aptitudes
-    const staggerContainers = document.querySelectorAll('.proyectos'); // Selecciona contenedores de cartas
+
+    const staggerContainers = document.querySelectorAll('.proyectos');
 
     const staggerObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -198,19 +198,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 cards.forEach((card, index) => {
                     setTimeout(() => {
                         card.classList.add('card-visible');
-                    }, index * 150); // 150ms de retraso entre cada una
+                    }, index * 150);
                 });
-                staggerObserver.unobserve(entry.target); // Solo animar una vez
+                staggerObserver.unobserve(entry.target);
             }
         });
     }, { rootMargin: '0px 0px -100px 0px' });
 
     staggerContainers.forEach(container => {
-        // Preparar las cartas: añadir clase hidden
+
         const cards = container.querySelectorAll('.card, .tech-card');
         cards.forEach(card => card.classList.add('card-hidden'));
 
-        // Observar el contenedor
+
         staggerObserver.observe(container);
     });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const btnDownload = document.getElementById('btn-download-cv');
+    const toastEl = document.getElementById('cv-toast');
+
+    if (btnDownload && toastEl) {
+
+        const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+
+        btnDownload.addEventListener('click', function () {
+            toast.show();
+        });
+    }
 });

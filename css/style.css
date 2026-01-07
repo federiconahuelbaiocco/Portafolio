@@ -32,12 +32,12 @@ html {
     }
 }
 
-/* Evita que el contenido anclado quede oculto bajo el header sticky */
+
 section {
     scroll-margin-top: 72px;
 }
 
-/* Bloquea el scroll del body cuando el menú móvil está abierto */
+
 body.menu-abierto {
     overflow: hidden;
 }
@@ -110,13 +110,13 @@ header>div {
 
 .menu-hamburguesa {
     margin-left: 12px !important;
-    /* separa un poco del borde izquierdo */
+    
     margin-right: 0 !important;
 }
 
 .modo-oscuro-header {
     margin-right: 0 !important;
-    /* acercar al borde derecho */
+    
     margin-left: 0 !important;
 }
 
@@ -125,7 +125,7 @@ header>div {
     border: none;
     cursor: pointer;
     margin: 0 8px 0 0;
-    /* menos separación a la derecha y centrado vertical */
+    
     font-size: 1.8rem;
     color: #222;
 }
@@ -164,7 +164,7 @@ body.dark-mode main {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Afinar componentes Bootstrap en modo oscuro */
+
 body.dark-mode .list-group-item {
     background-color: #2a2a2a;
     color: #f4f4f4;
@@ -175,7 +175,7 @@ body.dark-mode .list-group {
     background-color: #2a2a2a;
 }
 
-/* Aumentar contraste de textos atenuados en modo oscuro */
+
 body.dark-mode .text-muted {
     color: #bdbdbd !important;
 }
@@ -285,11 +285,11 @@ body {
     background: #f4f4f4;
     color: #222;
     overflow-x: hidden;
-    /* Previene scroll horizontal indeseado */
+    
 }
 
 header {
-    /* Eliminado background y color redundantes para permitir glassmorphism */
+    
     padding: 10px 16px;
 }
 
@@ -313,7 +313,7 @@ nav ul {
 
 nav a {
     color: #222;
-    /* Color oscuro por defecto para modo claro */
+    
     text-decoration: none;
     font-weight: bold;
 }
@@ -322,7 +322,7 @@ nav a:hover,
 nav a.active {
     text-decoration: none;
     color: #0d6efd;
-    /* Azul Bootstrap default para contraste en light mode */
+    
 }
 
 main {
@@ -336,7 +336,7 @@ main {
     box-sizing: border-box;
 }
 
-/* Hero Section Rediseñado */
+
 #presentacion {
     display: flex;
     flex-direction: column;
@@ -493,12 +493,12 @@ footer {
     font-size: 1.2rem !important;
 }
 
-/* Mejora visual de badges de tecnologías */
+
 .tech-badges .badge {
     font-size: 0.95rem;
     padding: 0.55em 0.8em;
     border-radius: 10rem;
-    /* pill */
+    
     margin: 0 6px 6px 0;
 }
 
@@ -517,7 +517,7 @@ body.dark-mode .tech-badges .badge {
     filter: saturate(1.1) brightness(1.05);
 }
 
-/* Menú hamburguesa clásico */
+
 .menu-hamburguesa {
     display: flex;
     flex-direction: column;
@@ -541,7 +541,7 @@ body.dark-mode .tech-badges .badge {
     margin: 3px 0;
     margin: 3px 0;
     background: #333 !important;
-    /* Color oscuro para modo claro */
+    
     border-radius: 2px;
     transition: 0.3s;
 }
@@ -550,12 +550,12 @@ body.dark-mode .menu-hamburguesa span {
     background: #fff !important;
 }
 
-/* Botón Volver Arriba */
+
 #btn-back-to-top {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    /* Más cerca del borde para móviles */
+    
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -586,7 +586,7 @@ body.dark-mode .menu-hamburguesa span {
     box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
 }
 
-/* Animación Staggered para tarjetas */
+
 .card-hidden {
     opacity: 0;
     transform: translateY(40px);
@@ -672,7 +672,7 @@ body.dark-mode .menu-hamburguesa span {
 
     .nav-list li a {
         color: #222;
-        /* Texto oscuro para modo claro */
+        
         font-size: 1rem;
         background: none;
         padding: 8px 16px;
