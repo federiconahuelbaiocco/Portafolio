@@ -236,6 +236,75 @@ body.dark-mode footer {
     border-radius: 10px;
 }
 
+.repo-privado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #555;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    background: #f3f3f3;
+}
+
+.proyecto-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.proyecto-link-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid #d6d6d6;
+    background: #f6f6f6;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.proyecto-link-icon img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.proyecto-link-icon:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.proyecto-link-text {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 600;
+}
+
+body.dark-mode .repo-privado {
+    color: #ddd;
+    border-color: #3d3d3d;
+    background: #2a2a2a;
+}
+
+body.dark-mode .proyecto-link-icon {
+    border-color: #3d3d3d;
+    background: #2a2a2a;
+}
+
+body.dark-mode .proyecto-link-icon img {
+    filter: brightness(1.15) invert(1);
+}
+
+body.dark-mode .proyecto-link-text {
+    color: #e6e6e6;
+}
+
 .conocimientos-list {
     display: flex;
     flex-wrap: wrap;
@@ -471,6 +540,27 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.card-destacado {
+    background: linear-gradient(160deg, #fff3d6 0%, #ffe3b3 100%);
+    border: 2px solid #f4c26b;
+    box-shadow: 0 10px 26px rgba(244, 194, 107, 0.35);
+    transform: translateY(-2px);
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 640px;
+}
+
+.card-destacado:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 36px rgba(244, 194, 107, 0.45);
+}
+
+body.dark-mode .card-destacado {
+    background: linear-gradient(160deg, #2b2620 0%, #3a2f1c 100%);
+    border-color: #7a5b2a;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
 .card img.tech,
