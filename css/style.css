@@ -255,35 +255,41 @@ body.dark-mode footer {
     gap: 10px;
     align-items: center;
     justify-content: center;
+    margin-top: 6px;
 }
 
 .proyecto-link-icon {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     border: 1px solid #d6d6d6;
     background: #f6f6f6;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .proyecto-link-icon img {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     display: block;
 }
 
-.proyecto-link-icon:hover {
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+.proyecto-link-button {
+    font-size: 1.05rem;
+    color: #1f1f1f;
+    font-weight: 700;
+    background: #ffd889;
+    border: 1px solid #f0c66a;
+    border-radius: 999px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.proyecto-link-text {
-    font-size: 0.95rem;
-    color: #333;
-    font-weight: 600;
+.proyecto-link-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 body.dark-mode .repo-privado {
@@ -301,8 +307,10 @@ body.dark-mode .proyecto-link-icon img {
     filter: brightness(1.15) invert(1);
 }
 
-body.dark-mode .proyecto-link-text {
-    color: #e6e6e6;
+body.dark-mode .proyecto-link-button {
+    color: #f1f1f1;
+    background: #3a2f1c;
+    border-color: #7a5b2a;
 }
 
 .conocimientos-list {
