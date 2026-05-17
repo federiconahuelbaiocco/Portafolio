@@ -229,3 +229,135 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+const STATS_NAMESPACE = 'federico-baiocco-portfolio';
+const STATS_KEYS = {
+    visits: 'page-views',
+    downloads: 'cv-downloads'
+};
+const STATS_SESSION_KEY = 'stats_counted_visit_v1';
+
+function statsUrl(action, key) {
+    return `https://api.countapi.xyz/${action}/${STATS_NAMESPACE}/${key}`;
+}
+
+async function statsHit(key) {
+    try {
+        const response = await fetch(statsUrl('hit', key), {
+            cache: 'no-store',
+            keepalive: true
+        });
+        if (!response.ok) return null;
+        const data = await response.json();
+        const value = Number(data.value);
+        return Number.isFinite(value) ? value : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+async function statsGet(key) {
+    try {
+        const response = await fetch(statsUrl('get', key), { cache: 'no-store' });
+        if (response.status === 404) return 0;
+        if (!response.ok) return null;
+        const data = await response.json();
+        const value = Number(data.value);
+        return Number.isFinite(value) ? value : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+function statsSetText(element, value) {
+    if (!element) return;
+    if (value === null || value === undefined || Number.isNaN(value)) {
+        element.textContent = 'n/a';
+        return;
+    }
+    element.textContent = String(value);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const statsPanel = document.getElementById('stats-panel');
+    const statsVisits = document.getElementById('stats-visits');
+    const statsDownloads = document.getElementById('stats-downloads');
+    const statsClose = document.getElementById('stats-close');
+    const btnDownload = document.getElementById('btn-download-cv');
+
+    async function refreshCounts() {
+        const [visits, downloads] = await Promise.all([
+            statsGet(STATS_KEYS.visits),
+            statsGet(STATS_KEYS.downloads)
+        ]);
+        statsSetText(statsVisits, visits);
+        statsSetText(statsDownloads, downloads);
+    }
+
+    async function initCounts() {
+        const counted = sessionStorage.getItem(STATS_SESSION_KEY);
+        if (!counted) {
+            sessionStorage.setItem(STATS_SESSION_KEY, '1');
+            const visits = await statsHit(STATS_KEYS.visits);
+            statsSetText(statsVisits, visits);
+        } else {
+            const visits = await statsGet(STATS_KEYS.visits);
+            statsSetText(statsVisits, visits);
+        }
+
+        const downloads = await statsGet(STATS_KEYS.downloads);
+        statsSetText(statsDownloads, downloads);
+    }
+
+    function setPanelVisible(visible) {
+        if (!statsPanel) return;
+        statsPanel.classList.toggle('stats-panel--visible', visible);
+        statsPanel.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        if (visible) {
+            refreshCounts();
+        }
+    }
+
+    function togglePanel() {
+        if (!statsPanel) return;
+        setPanelVisible(!statsPanel.classList.contains('stats-panel--visible'));
+    }
+
+    function shouldShowFromHash() {
+        return window.location.hash === '#stats';
+    }
+
+    if (statsPanel) {
+        if (shouldShowFromHash()) {
+            setPanelVisible(true);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'l') {
+                togglePanel();
+            }
+        });
+
+        if (statsClose) {
+            statsClose.addEventListener('click', function () {
+                setPanelVisible(false);
+            });
+        }
+
+        window.addEventListener('hashchange', function () {
+            if (shouldShowFromHash()) {
+                setPanelVisible(true);
+            }
+        });
+    }
+
+    initCounts();
+
+    if (btnDownload) {
+        btnDownload.addEventListener('click', function () {
+            statsHit(STATS_KEYS.downloads).then(function (downloads) {
+                statsSetText(statsDownloads, downloads);
+            });
+        });
+    }
+});

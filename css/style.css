@@ -684,6 +684,72 @@ body.dark-mode .menu-hamburguesa span {
     box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
 }
 
+.stats-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 260px;
+    background: rgba(15, 15, 15, 0.95);
+    color: #f7f7f7;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    padding: 12px;
+    display: none;
+    z-index: 1100;
+    font-size: 0.95rem;
+}
+
+.stats-panel--visible {
+    display: block;
+}
+
+.stats-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.stats-panel__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stats-row strong {
+    font-size: 1.05rem;
+}
+
+#stats-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    line-height: 1;
+    font-size: 0.9rem;
+}
+
+#stats-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stats-hint {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #c9c9c9;
+}
+
 
 .card-hidden {
     opacity: 0;
