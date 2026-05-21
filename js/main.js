@@ -230,6 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+const STATS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKFIdli6qiVJ8N2PiMmzehb3WWDKDEWz0vThc1LzJBd820l3Zmox_N9e2yzpFzIIMh/exec';
 const STATS_NAMESPACE = 'federico-baiocco-portfolio';
 const STATS_KEYS = {
     visits: 'page-views',
@@ -237,13 +238,22 @@ const STATS_KEYS = {
 };
 const STATS_SESSION_KEY = 'stats_counted_visit_v1';
 
-function statsUrl(action, key) {
-    return `https://api.countapi.xyz/${action}/${STATS_NAMESPACE}/${key}`;
+function statsIsConfigured() {
+    return STATS_ENDPOINT && !STATS_ENDPOINT.includes('REPLACE_ME');
 }
 
-async function statsHit(key) {
+function statsUrl(action, key) {
+    const url = new URL(STATS_ENDPOINT);
+    url.searchParams.set('action', action);
+    url.searchParams.set('key', key);
+    url.searchParams.set('ns', STATS_NAMESPACE);
+    return url.toString();
+}
+
+async function statsRequest(action, key) {
+    if (!statsIsConfigured()) return null;
     try {
-        const response = await fetch(statsUrl('hit', key), {
+        const response = await fetch(statsUrl(action, key), {
             cache: 'no-store',
             keepalive: true
         });
@@ -256,17 +266,12 @@ async function statsHit(key) {
     }
 }
 
+async function statsHit(key) {
+    return statsRequest('hit', key);
+}
+
 async function statsGet(key) {
-    try {
-        const response = await fetch(statsUrl('get', key), { cache: 'no-store' });
-        if (response.status === 404) return 0;
-        if (!response.ok) return null;
-        const data = await response.json();
-        const value = Number(data.value);
-        return Number.isFinite(value) ? value : null;
-    } catch (error) {
-        return null;
-    }
+    return statsRequest('get', key);
 }
 
 function statsSetText(element, value) {
